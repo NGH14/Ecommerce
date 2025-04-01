@@ -1,6 +1,5 @@
-
 class AccessController {
-  
+
   signup = async (req,res,next) =>{
     try {
       console.log(`[P]::signup::`, req.body)

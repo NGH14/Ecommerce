@@ -10,7 +10,6 @@ const Role = {
 	ADMIN: "000"
 }
 
-
 class AccessService {
 	static signUp = async ({ name, email, password }) => {
 		try {

@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const COLLECTION_NAME = "Pet Shops";
 const DOCUMENT_NAME = "shop";
 
-
 const userSchema = new mongoose.Schema({
     timestamp: true,
     collection: COLLECTION_NAME,
@@ -39,5 +38,4 @@ const userSchema = new mongoose.Schema({
 
 });
 
-//Export the model
 module.exports = mongoose.model('User', userSchema);
