@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const COLLECTION_NAME = 'tokens';
 const DOCUMENT_NAME = 'token';
 
 
-const tokenSchema = new mongoose.Schema({
+const tokenSchema = new Schema({
   collection: COLLECTION_NAME,
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'shop',
     required: true,
   },
@@ -16,9 +16,9 @@ const tokenSchema = new mongoose.Schema({
     required: true,
   },
   refreshToken: {
-    type: String,
-    required: true,
+    type: Array,
+    default: [],
   },
 });
 
-module.exports = mongoose.model(DOCUMENT_NAME, tokenSchema);
+module.exports = model(DOCUMENT_NAME, tokenSchema);
