@@ -1,42 +1,46 @@
-const bcrypt = require("bcrypt")
-const crypto = require("crypto")
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 const shopModel = require('../models/shop.models');
 
 const Role = {
-	SHOP: "0001",
-	WRITER: "008",
-	EDITOR: "007",
-	ADMIN: "000"
-}
+  SHOP: '0001',
+  WRITER: '008',
+  EDITOR: '007',
+  ADMIN: '000',
+};
 
 class AccessService {
-	static signUp = async ({ name, email, password }) => {
-		try {
-			const isCreated = await shopModel.exists({ email });
-			if (isCreated)
-				return {
-					code: 'yyyy',
-					message: 'Shop already registered ',
-				};
-        const passwordHash = await bcrypt.hash(password, 10);
+  static signUp = async ({ name, email, password }) => {
+    try {
+      const isCreated = await shopModel.exists({ email });
+      if (isCreated) {
+        return {
+          code: 'yyyy',
+          message: 'Shop already registered ',
+        };
+      }
 
-				const newShop = await shopModel.create({
-					name, password: passwordHash, roles: [Role.SHOP]
-				})
+      const passwordHash = await bcrypt.hash(password, 10);
 
-				if (newShop) {
-					const { publicKey, privateKey } = crypto.generateKeyPair('rsa', {modulusLength: 4096})
-					console.log({ publicKey, privateKey })
-				}
+      const newShop = await shopModel.create({
+        name,
+        password: passwordHash,
+        roles: [Role.SHOP],
+      });
 
-
-		} catch (error) {
-			return {
-				code: 'xxxx',
-				message: error.message,
-				status: 'error',
-			};
-		}
-	};
+      if (newShop) {
+        const { publicKey, privateKey } = crypto.generateKeyPair('rsa', {
+          modulusLength: 4096,
+        });
+        console.log({ publicKey, privateKey });
+      }
+    } catch (error) {
+      return {
+        code: 'xxxx',
+        message: error.message,
+        status: 'error',
+      };
+    }
+  };
 }
