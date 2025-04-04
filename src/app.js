@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
 
-// require('./databases/init.mongodb');
+require('./databases/init.mongodb');
 
 const app = express();
 

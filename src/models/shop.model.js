@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const COLLECTION_NAME = 'Pet Shops';
+const COLLECTION_NAME = 'shops';
 const DOCUMENT_NAME = 'shop';
 const _MAX_LENGTH = 150;
 const _MIN_LENGTH = 8;
 
-const userSchema = new mongoose.Schema({
+const shopSchema = new mongoose.Schema({
   timestamp: true,
   collection: COLLECTION_NAME,
   name: {
@@ -41,4 +41,4 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model(DOCUMENT_NAME, shopSchema);
